@@ -40,8 +40,10 @@ interface StudyProgram {
   id: string;
   name: string;
   executionPeriod: string;
+  knowledgeTestScore: number;
   averageScore: number;
   amValidationScore: number;
+  finalScore: number;
   status: 'LULUS' | 'TIDAK LULUS' | 'REMIDIAL';
   materials: StudyMaterial[];
 }
@@ -73,8 +75,10 @@ export default function App() {
       id: "prog-1",
       name: "TOS Mei 2026",
       executionPeriod: "Mei 2026",
+      knowledgeTestScore: 88,
       averageScore: 92,
       amValidationScore: 95,
+      finalScore: 91.6,
       status: "LULUS",
       materials: [
         { id: "m1", name: "Standard Operating Procedure Kitchen", score: 95, trainer: "Budi Santoso", date: "2026-05-10", status: "LULUS" },
@@ -86,8 +90,10 @@ export default function App() {
       id: "prog-2",
       name: "SOS Mei 2026",
       executionPeriod: "Mei 2026",
+      knowledgeTestScore: 82,
       averageScore: 85,
       amValidationScore: 88,
+      finalScore: 85.0,
       status: "LULUS",
       materials: [
         { id: "m4", name: "Customer Service Excellency", score: 82, trainer: "Dewi Lestari", date: "2026-05-18", status: "LULUS" },
@@ -98,8 +104,10 @@ export default function App() {
       id: "prog-3",
       name: "MOS 2026",
       executionPeriod: "Semester 1 2026",
+      knowledgeTestScore: 85,
       averageScore: 91,
       amValidationScore: 90,
+      finalScore: 88.6,
       status: "LULUS",
       materials: [
         { id: "m6", name: "Store Management System", score: 94, trainer: "Budi Santoso", date: "2026-04-05", status: "LULUS" },
@@ -277,19 +285,27 @@ export default function App() {
                       <ArrowLeft className="w-4 h-4" />
                       Kembali ke Dashboard
                     </button>
-                    <div className="flex justify-between items-end">
+                    <div className="flex flex-wrap justify-between items-end gap-6">
                       <div>
                         <h3 className="text-3xl font-black text-slate-900 tracking-tighter uppercase">{selectedProgram?.name}</h3>
                         <p className="text-sm font-semibold text-slate-500 italic mt-1">Detail Hasil Evaluasi Materi Pembelajaran</p>
                       </div>
-                      <div className="flex gap-8 text-right">
+                      <div className="flex flex-wrap gap-6 md:gap-10 text-right">
+                        <div>
+                          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Knowledge Test</span>
+                          <p className="text-4xl font-black text-slate-700 italic tracking-tighter">{selectedProgram?.knowledgeTestScore}</p>
+                        </div>
+                        <div>
+                          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Nilai Kelas</span>
+                          <p className="text-4xl font-black text-slate-700 italic tracking-tighter">{selectedProgram?.averageScore}</p>
+                        </div>
                         <div>
                           <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Validasi Area Manager</span>
                           <p className="text-4xl font-black text-orange-500 italic tracking-tighter">{selectedProgram?.amValidationScore}</p>
                         </div>
                         <div>
-                          <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Aggregate Score</span>
-                          <p className="text-4xl font-black text-red-600 italic tracking-tighter">{selectedProgram?.averageScore}</p>
+                          <span className="text-[10px] font-bold text-red-600 uppercase tracking-widest">Nilai Akhir</span>
+                          <p className="text-5xl font-black text-red-600 italic tracking-tighter">{selectedProgram?.finalScore}</p>
                         </div>
                       </div>
                     </div>
