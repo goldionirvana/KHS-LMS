@@ -4,15 +4,15 @@
  */
 
 import React, { useState } from 'react';
-import { 
-  User, 
-  IdCard, 
-  Briefcase, 
-  Store, 
-  GraduationCap, 
-  Calendar, 
-  UserCheck, 
-  BookOpen, 
+import {
+  User,
+  IdCard,
+  Briefcase,
+  Store,
+  GraduationCap,
+  Calendar,
+  UserCheck,
+  BookOpen,
   ChevronRight,
   TrendingUp,
   Download,
@@ -74,7 +74,7 @@ export default function App() {
   const [programs] = useState<StudyProgram[]>([
     {
       id: "prog-1",
-      name: "TOS Mei 2026",
+      name: "TOS - Mei 2026",
       executionPeriod: "Mei 2026",
       knowledgeTestScore: 88,
       averageScore: 92,
@@ -89,7 +89,7 @@ export default function App() {
     },
     {
       id: "prog-2",
-      name: "SOS Mei 2026",
+      name: "QC - Mei 2026",
       executionPeriod: "Mei 2026",
       knowledgeTestScore: 82,
       averageScore: 85,
@@ -103,7 +103,7 @@ export default function App() {
     },
     {
       id: "prog-3",
-      name: "MOS 2026",
+      name: "Stocker - Mei 2026",
       executionPeriod: "Semester 1 2026",
       knowledgeTestScore: 85,
       averageScore: 91,
@@ -140,7 +140,7 @@ export default function App() {
             <h1 className="text-2xl font-black text-slate-800 tracking-tighter">PT PESTA PORA ABADI</h1>
             <p className="text-xs font-bold text-red-600 tracking-widest uppercase mt-1">Learning & Development Division</p>
           </motion.div>
-          
+
           <div className="flex items-center gap-4">
             <div className="text-right hidden md:block">
               <h2 className="text-lg font-bold text-slate-800 uppercase italic">Kartu Hasil Study</h2>
@@ -155,48 +155,45 @@ export default function App() {
 
       <main className="max-w-7xl mx-auto px-6 mt-8 md:px-12 no-certificate-print">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          
+
           {/* Employee Profile Section */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="lg:col-span-4 space-y-6"
           >
             <div className="bg-white rounded-2xl shadow-xl shadow-slate-200/50 border border-slate-200 overflow-hidden">
-               <div className="p-8">
-                 <div className="flex flex-col items-center text-center mb-8">
-                    <div className="w-24 h-24 rounded-full border-4 border-white shadow-lg shadow-slate-300 overflow-hidden bg-slate-50 mb-4">
-                      <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${employee.name}`} alt="Profile" />
-                    </div>
-                    <h3 className="text-xl font-bold text-slate-800">{employee.name}</h3>
-                    <p className="text-sm font-semibold text-red-600 uppercase tracking-wider">{employee.position}</p>
-                 </div>
-
-                 <div className="space-y-4 pt-6 border-t border-slate-100">
-                    <ProfileItem label="NIK Karyawan" value={employee.nik} />
-                    <ProfileItem label="Store Penempatan" value={employee.storeLocation} />
-                    <ProfileItem label="Regional" value={employee.region} />
-                 </div>
-               </div>
-               
-               <div className="bg-slate-900 p-8 text-white text-center relative overflow-hidden">
-                  <div className="relative z-10">
-                    <span className="text-[10px] font-bold uppercase tracking-widest opacity-60">Nilai Rata-rata Total</span>
-                    <div className="flex items-center justify-center gap-1 mt-2">
-                       <span className="text-5xl font-black italic tracking-tighter">{employee.averageTotalScore}</span>
-                       <span className="text-xl opacity-40 font-bold">/100</span>
-                    </div>
-                    <div className="mt-4 px-4 py-1.5 bg-red-600 text-xs font-bold rounded-full inline-block shadow-lg shadow-red-900/50">
-                      PREDIKAT: A- (Sangat Baik)
-                    </div>
+              <div className="p-8">
+                <div className="flex flex-col items-center text-center mb-8">
+                  <div className="w-24 h-24 rounded-full border-4 border-white shadow-lg shadow-slate-300 overflow-hidden bg-slate-50 mb-4">
+                    <img src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${employee.name}`} alt="Profile" />
                   </div>
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-red-600/10 rounded-full blur-3xl -mr-16 -mt-16" />
-               </div>
+                  <h3 className="text-xl font-bold text-slate-800">{employee.name}</h3>
+                  <p className="text-sm font-semibold text-red-600 uppercase tracking-wider">{employee.position}</p>
+                </div>
+
+                <div className="space-y-4 pt-6 border-t border-slate-100">
+                  <ProfileItem label="NIK Karyawan" value={employee.nik} />
+                  <ProfileItem label="Store Penempatan" value={employee.storeLocation} />
+                  <ProfileItem label="Regional" value={employee.region} />
+                </div>
+              </div>
+
+              <div className="bg-slate-900 p-8 text-white text-center relative overflow-hidden">
+                <div className="relative z-10">
+                  <span className="text-[10px] font-bold uppercase tracking-widest opacity-60">Nilai Rata-rata Total</span>
+                  <div className="flex items-center justify-center gap-1 mt-2">
+                    <span className="text-5xl font-black italic tracking-tighter">{employee.averageTotalScore}</span>
+                    <span className="text-xl opacity-40 font-bold">/100</span>
+                  </div>
+                </div>
+                <div className="absolute top-0 right-0 w-32 h-32 bg-red-600/10 rounded-full blur-3xl -mr-16 -mt-16" />
+              </div>
             </div>
           </motion.div>
 
           {/* List/Detail Section */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             className="lg:col-span-8"
@@ -204,7 +201,7 @@ export default function App() {
             <AnimatePresence mode="wait">
               {!selectedProgramId ? (
                 /* VIEW: Program List */
-                <motion.div 
+                <motion.div
                   key="list"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -216,7 +213,7 @@ export default function App() {
                       <h3 className="text-xl font-bold text-slate-800">Daftar Program Study</h3>
                       <p className="text-sm text-slate-400">Pilih program untuk melihat detail materi</p>
                     </div>
-                    <button 
+                    <button
                       onClick={() => window.print()}
                       className="no-print p-2 hover:bg-slate-100 rounded-lg transition-colors border border-slate-200 shadow-sm cursor-pointer"
                       title="Print Report"
@@ -227,37 +224,37 @@ export default function App() {
 
                   <div className="divide-y divide-slate-100">
                     {programs.map((program) => (
-                      <button 
+                      <button
                         key={program.id}
                         onClick={() => setSelectedProgramId(program.id)}
                         className="w-full text-left p-6 flex items-center justify-between hover:bg-slate-50 transition-all group cursor-pointer"
                       >
                         <div className="flex items-center gap-6">
-                           <div className="w-12 h-12 bg-red-50 text-red-600 rounded-xl flex items-center justify-center font-black group-hover:bg-red-600 group-hover:text-white transition-colors border border-red-100">
-                             {program.name.substring(0, 1)}
-                           </div>
-                           <div>
-                              <h4 className="font-bold text-slate-800 text-lg group-hover:text-red-600 transition-colors uppercase">{program.name}</h4>
-                              <div className="flex items-center gap-3 mt-1">
-                                <span className="text-xs font-semibold text-slate-400 flex items-center gap-1">
-                                  <Calendar className="w-3 h-3" />
-                                  {program.executionPeriod}
-                                </span>
-                                <span className="text-[10px] uppercase font-bold text-slate-300">•</span>
-                                <span className="text-xs font-semibold text-slate-400 flex items-center gap-1">
-                                  <FileText className="w-3 h-3" />
-                                  {program.materials.length} Materi
-                                </span>
-                              </div>
-                           </div>
+                          <div className="w-12 h-12 bg-red-50 text-red-600 rounded-xl flex items-center justify-center font-black group-hover:bg-red-600 group-hover:text-white transition-colors border border-red-100">
+                            {program.name.substring(0, 1)}
+                          </div>
+                          <div>
+                            <h4 className="font-bold text-slate-800 text-lg group-hover:text-red-600 transition-colors uppercase">{program.name}</h4>
+                            <div className="flex items-center gap-3 mt-1">
+                              <span className="text-xs font-semibold text-slate-400 flex items-center gap-1">
+                                <Calendar className="w-3 h-3" />
+                                {program.executionPeriod}
+                              </span>
+                              <span className="text-[10px] uppercase font-bold text-slate-300">•</span>
+                              <span className="text-xs font-semibold text-slate-400 flex items-center gap-1">
+                                <FileText className="w-3 h-3" />
+                                {program.materials.length} Materi
+                              </span>
+                            </div>
+                          </div>
                         </div>
-                        
+
                         <div className="flex items-center gap-8">
-                           <div className="text-right flex flex-col items-end">
-                              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1 italic">Rata-rata</span>
-                              <span className="text-xl font-black text-slate-900 group-hover:scale-110 transition-transform">{program.averageScore}</span>
-                           </div>
-                           <ChevronRight className="w-5 h-5 text-slate-300 group-hover:text-red-500 group-hover:translate-x-1 transition-all" />
+                          <div className="text-right flex flex-col items-end">
+                            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1 italic">Rata-rata</span>
+                            <span className="text-xl font-black text-slate-900 group-hover:scale-110 transition-transform">{program.averageScore}</span>
+                          </div>
+                          <ChevronRight className="w-5 h-5 text-slate-300 group-hover:text-red-500 group-hover:translate-x-1 transition-all" />
                         </div>
                       </button>
                     ))}
@@ -265,13 +262,13 @@ export default function App() {
 
                   <div className="p-8 bg-slate-50/50 border-t border-slate-100 text-center">
                     <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-relaxed">
-                      Laporan ini diterbitkan secara otomatis oleh sistem L&D Academy<br/>PT Pesta Pora Abadi
+                      Laporan ini diterbitkan secara otomatis oleh sistem L&D Academy<br />PT Pesta Pora Abadi
                     </p>
                   </div>
                 </motion.div>
               ) : (
                 /* VIEW: Material Detail */
-                <motion.div 
+                <motion.div
                   key="detail"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -279,7 +276,7 @@ export default function App() {
                   className="bg-white rounded-2xl shadow-xl shadow-slate-200/50 border border-slate-200 overflow-hidden"
                 >
                   <div className="p-8 border-b border-slate-100 bg-slate-50/50">
-                    <button 
+                    <button
                       onClick={() => setSelectedProgramId(null)}
                       className="flex items-center gap-2 text-red-600 font-bold text-xs uppercase tracking-widest mb-6 hover:translate-x-[-4px] transition-transform no-print cursor-pointer"
                     >
@@ -290,7 +287,7 @@ export default function App() {
                       <div>
                         <h3 className="text-3xl font-black text-slate-900 tracking-tighter uppercase">{selectedProgram?.name}</h3>
                         <p className="text-sm font-semibold text-slate-500 italic mt-1">Detail Hasil Evaluasi Materi Pembelajaran</p>
-                        <button 
+                        <button
                           onClick={() => {
                             setShowCertificate(true);
                             setTimeout(() => {
@@ -346,7 +343,7 @@ export default function App() {
                               <span className="font-medium text-slate-600">{material.trainer}</span>
                             </td>
                             <td className="px-8 py-6 border-b border-slate-50 text-center">
-                               <span className="text-slate-500 font-mono text-xs italic">{new Date(material.date).toLocaleDateString('id-ID')}</span>
+                              <span className="text-slate-500 font-mono text-xs italic">{new Date(material.date).toLocaleDateString('id-ID')}</span>
                             </td>
                             <td className="px-8 py-6 border-b border-slate-50 text-center">
                               <span className="text-lg font-black text-slate-900 group-hover:text-red-600 transition-colors italic leading-none">{material.score}</span>
@@ -376,9 +373,9 @@ export default function App() {
                       <p className="text-[10px] font-black text-slate-400 uppercase mt-4">Training Center Center</p>
                     </div>
                     <div className="text-right">
-                       <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-12">Manager L&D Division</span>
-                       <p className="text-sm font-bold text-slate-800 underline decoration-red-600 decoration-2 underline-offset-4 uppercase">Kartika Sari, S.Psi</p>
-                       <span className="text-[10px] text-slate-500 font-bold">NIK: PPA-MGR-002</span>
+                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-12">Manager L&D Division</span>
+                      <p className="text-sm font-bold text-slate-800 underline decoration-red-600 decoration-2 underline-offset-4 uppercase">Kartika Sari, S.Psi</p>
+                      <span className="text-[10px] text-slate-500 font-bold">NIK: PPA-MGR-002</span>
                     </div>
                   </div>
                 </motion.div>
@@ -409,6 +406,7 @@ export default function App() {
             <h1 className="text-4xl font-black tracking-tighter text-slate-900 mb-2">SERTIFIKAT KELULUSAN</h1>
             <p className="text-sm font-bold text-red-600 tracking-[0.3em] uppercase">PT PESTA PORA ABADI ACADEMY</p>
             <div className="w-24 h-1 bg-red-600 mx-auto mt-6" />
+            <p className="text-sm font-bold tracking-[0.3em] uppercase">No: 037/HRD-MiGo/CERT/V/2026</p>
           </div>
 
           <div className="text-center mb-12">
@@ -473,7 +471,7 @@ export default function App() {
           </div>
 
           <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-center">
-             <p className="text-[9px] font-bold text-slate-300 tracking-[0.4em] uppercase">Authenticity Verified through L&D Academy System</p>
+            <p className="text-[9px] font-bold text-slate-300 tracking-[0.4em] uppercase">Authenticity Verified through L&D Academy System</p>
           </div>
         </div>
       )}
