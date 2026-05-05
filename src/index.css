@@ -42,9 +42,28 @@
     border-radius: 12px !important;
   }
 
-  /* Force colors to show in print */
-  * {
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
+  /* Certificate Specific Print Styles */
+  .certificate-print-only {
+    display: none !important;
+  }
+}
+
+@media print {
+  .certificate-mode .no-certificate-print {
+    display: none !important;
+  }
+
+  .certificate-mode .certificate-print-only {
+    display: block !important;
+    width: 210mm;
+    height: 297mm;
+    margin: 0;
+    padding: 20mm;
+    background: white !important;
+  }
+  
+  @page {
+    size: A4;
+    margin: 0;
   }
 }

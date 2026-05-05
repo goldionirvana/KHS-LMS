@@ -59,6 +59,7 @@ interface EmployeeInfo {
 
 export default function App() {
   const [selectedProgramId, setSelectedProgramId] = useState<string | null>(null);
+  const [showCertificate, setShowCertificate] = useState(false);
 
   // Mock Data aligned with user's examples
   const [employee] = useState<EmployeeInfo>({
@@ -128,12 +129,12 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 font-sans selection:bg-red-100 selection:text-red-900 pb-12">
+    <div className={`min-h-screen bg-slate-50 font-sans selection:bg-red-100 selection:text-red-900 pb-12 ${showCertificate ? 'certificate-mode' : ''}`}>
       {/* Brand Accent Bar */}
-      <div className="h-2 w-full bg-red-600 sticky top-0 z-[60]" />
+      <div className="h-2 w-full bg-red-600 sticky top-0 z-[60] no-certificate-print" />
 
       {/* Main Header */}
-      <header className="bg-white border-b border-slate-200 px-6 py-6 md:px-12 md:py-8 no-print">
+      <header className="bg-white border-b border-slate-200 px-6 py-6 md:px-12 md:py-8 no-print no-certificate-print">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
           <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>
             <h1 className="text-2xl font-black text-slate-800 tracking-tighter">PT PESTA PORA ABADI</h1>
@@ -152,7 +153,7 @@ export default function App() {
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-6 mt-8 md:px-12">
+      <main className="max-w-7xl mx-auto px-6 mt-8 md:px-12 no-certificate-print">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
           {/* Employee Profile Section */}
@@ -289,6 +290,19 @@ export default function App() {
                       <div>
                         <h3 className="text-3xl font-black text-slate-900 tracking-tighter uppercase">{selectedProgram?.name}</h3>
                         <p className="text-sm font-semibold text-slate-500 italic mt-1">Detail Hasil Evaluasi Materi Pembelajaran</p>
+                        <button 
+                          onClick={() => {
+                            setShowCertificate(true);
+                            setTimeout(() => {
+                              window.print();
+                              setShowCertificate(false);
+                            }, 500);
+                          }}
+                          className="mt-4 flex items-center gap-2 px-4 py-2 bg-slate-900 text-white rounded-lg text-xs font-bold uppercase tracking-widest hover:bg-red-600 transition-colors cursor-pointer no-print"
+                        >
+                          <Download className="w-4 h-4" />
+                          Download Sertifikat
+                        </button>
                       </div>
                       <div className="flex flex-wrap gap-6 md:gap-10 text-right">
                         <div>
@@ -381,6 +395,88 @@ export default function App() {
       {/* Decorative Blur Elements */}
       <div className="fixed bottom-[-100px] left-[-100px] w-80 h-80 bg-red-600/5 rounded-full blur-3xl pointer-events-none -z-10" />
       <div className="fixed top-[-100px] right-[-100px] w-80 h-80 bg-orange-600/5 rounded-full blur-3xl pointer-events-none -z-10" />
+
+      {/* Certificate Print View */}
+      {showCertificate && selectedProgram && (
+        <div className="certificate-print-only bg-white text-slate-900 p-12 border-[16px] border-double border-slate-100 relative">
+          {/* Certificate Border Accents */}
+          <div className="absolute top-0 left-0 w-32 h-32 border-t-8 border-l-8 border-red-600" />
+          <div className="absolute top-0 right-0 w-32 h-32 border-t-8 border-r-8 border-red-600" />
+          <div className="absolute bottom-0 left-0 w-32 h-32 border-b-8 border-l-8 border-red-600" />
+          <div className="absolute bottom-0 right-0 w-32 h-32 border-b-8 border-r-8 border-red-600" />
+
+          <div className="text-center mb-12">
+            <h1 className="text-4xl font-black tracking-tighter text-slate-900 mb-2">SERTIFIKAT KELULUSAN</h1>
+            <p className="text-sm font-bold text-red-600 tracking-[0.3em] uppercase">PT PESTA PORA ABADI ACADEMY</p>
+            <div className="w-24 h-1 bg-red-600 mx-auto mt-6" />
+          </div>
+
+          <div className="text-center mb-12">
+            <p className="text-slate-500 italic text-sm mb-4">Diberikan kepada:</p>
+            <h2 className="text-3xl font-bold text-slate-800 underline decoration-slate-200 decoration-4 underline-offset-8 uppercase mb-2">{employee.name}</h2>
+            <p className="font-mono text-xs text-slate-400">NIK: {employee.nik} • {employee.position}</p>
+          </div>
+
+          <div className="text-center mb-12 max-w-2xl mx-auto">
+            <p className="text-slate-600 leading-relaxed">
+              Telah dinyatakan <span className="font-bold text-red-600 uppercase italic">LULUS</span> dengan predikat "Sangat Baik" dalam mengikuti program pelatihan dan pengembangan operasional Mi Gacoan:
+            </p>
+            <h3 className="text-2xl font-black text-slate-900 mt-4 uppercase tracking-tight italic border-y-2 border-slate-100 py-3">{selectedProgram.name}</h3>
+          </div>
+
+          {/* Material Detail Table */}
+          <div className="mb-12">
+            <table className="w-full border-collapse">
+              <thead>
+                <tr className="bg-slate-50 text-[10px] font-black uppercase tracking-widest text-slate-400">
+                  <th className="p-3 border border-slate-200 text-left">Materi Pembelajaran</th>
+                  <th className="p-3 border border-slate-200">Trainer</th>
+                  <th className="p-3 border border-slate-200 text-center">Nilai</th>
+                </tr>
+              </thead>
+              <tbody className="text-xs">
+                {selectedProgram.materials.map(m => (
+                  <tr key={m.id}>
+                    <td className="p-3 border border-slate-100 font-bold">{m.name}</td>
+                    <td className="p-3 border border-slate-100 text-center">{m.trainer}</td>
+                    <td className="p-3 border border-slate-100 text-center font-black italic">{m.score}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Performance Summary */}
+          <div className="grid grid-cols-4 gap-6 mb-16">
+            <ScoreStat label="Knowledge Test" value={selectedProgram.knowledgeTestScore} />
+            <ScoreStat label="Nilai Kelas" value={selectedProgram.averageScore} />
+            <ScoreStat label="Validasi AM" value={selectedProgram.amValidationScore} />
+            <div className="bg-red-600 text-white p-4 rounded-xl text-center">
+              <span className="text-[10px] font-bold uppercase tracking-widest opacity-80 block mb-1">Nilai Akhir</span>
+              <span className="text-2xl font-black italic">{selectedProgram.finalScore}</span>
+            </div>
+          </div>
+
+          {/* Signatures */}
+          <div className="grid grid-cols-2 gap-20 items-end mt-20">
+            <div className="text-center">
+              <div className="w-32 h-32 bg-slate-50 border-2 border-dashed border-slate-200 rounded-full flex flex-col items-center justify-center font-black text-slate-300 mx-auto mb-4 grayscale">
+                <Stamp className="w-10 h-10 mb-1 opacity-20" />
+                <span className="text-[10px] tracking-tighter">STEMPEL RESMI</span>
+              </div>
+              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Divisi Learning & Development</p>
+            </div>
+            <div className="text-center border-t-2 border-slate-900 pt-4">
+              <p className="text-sm font-bold text-slate-800 uppercase italic">Kartika Sari, S.Psi</p>
+              <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Manager L&D Division</p>
+            </div>
+          </div>
+
+          <div className="absolute bottom-8 left-1/2 -translate-x-1/2 text-center">
+             <p className="text-[9px] font-bold text-slate-300 tracking-[0.4em] uppercase">Authenticity Verified through L&D Academy System</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -390,6 +486,15 @@ function ProfileItem({ label, value }: { label: string; value: string }) {
     <div className="flex flex-col">
       <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">{label}</span>
       <span className="text-base font-bold text-slate-800 border-b border-slate-100 pb-1.5">{value}</span>
+    </div>
+  );
+}
+
+function ScoreStat({ label, value }: { label: string; value: number }) {
+  return (
+    <div className="bg-slate-50 p-4 rounded-xl text-center border border-slate-100">
+      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-1">{label}</span>
+      <span className="text-2xl font-black text-slate-800 italic">{value}</span>
     </div>
   );
 }
